@@ -1,0 +1,49 @@
+# Laravel & PHP
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.phpunit.result.cache
+Homestead.yaml
+Homestead.json
+/.idea
+/.vscode
+/.phpunit.cache
+.phpstorm.meta.php
+
+# Laravel Telescope
+/storage/telescope
+
+# Laravel Horizon
+/storage/horizon
+
+# Cache, logs, compiled files
+/storage/framework/cache/data
+/storage/logs
+/storage/framework/sessions
+/storage/framework/views
+/storage/debugbar
+
+# Composer
+composer.lock
+
+# NPM
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+*.sublime-project
+
+# Laravel Mix
+/public/hot
+/public/mix-manifest.json
+/public/css
+/public/js
+
+# Ignorar archivos SQLite si los usas localmente
+/database/*.sqlite

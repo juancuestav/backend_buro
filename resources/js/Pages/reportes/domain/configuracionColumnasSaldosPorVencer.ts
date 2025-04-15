@@ -1,0 +1,58 @@
+export const configuracionColumnasSaldosPorVencer = [
+    {
+        title: "Fecha",
+        field: "fecha",
+        headerSort: false,
+        editor: "input",
+        minWidth: 200,
+    },
+    {
+        title: "Institución financiera",
+        field: "institucion_financiera",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Total por vencer",
+        field: "total_por_vencer",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Por vencer 1 a 30 días",
+        field: "por_vencer_1_30_dias",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Por vencer 1 - 3 meses",
+        field: "por_vencer_1_3_meses",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Por vencer 3 - 6 meses",
+        field: "por_vencer_3_6_meses",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Por vencer 6 - 12 meses",
+        field: "por_vencer_6_12_meses",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+    {
+        title: "Por vencer más 12 meses",
+        field: "por_vencer_mas_12_meses",
+        headerSort: false,
+        editor: "input",
+        minWidth: 100,
+    },
+]

@@ -1,0 +1,136 @@
+// iconos
+$check: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E";
+
+$options-padding-x: 20px;
+$options-padding-y: 7px;
+
+// Variables globales del componente
+$vs-component-line-height: $input-line-height;
+
+//  Item con estado hover
+$vs-state-active-bg: rgba($primary, 0.12);
+$vs-state-active-color: $primary !important;
+
+// Borde del input
+$vs-border-width: $input-border-width;
+$vs-border-radius: $input-border-radius;
+$vs-border-color: $input-border-color;
+
+@import "vue-select/src/scss/vue-select.scss";
+
+// Ajusta el contenido demasiado largo para que no sobresalga
+.vs__selected-options {
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+// Chevron icon
+.vs__clear {
+    font-size: 10px;
+    font-weight: bolder;
+}
+
+// Altura del input igual a los demás inputs
+.vs__dropdown-toggle {
+    padding: 1px 0 5px 0;
+    transition: all 0.25s ease-in-out;
+
+    .vs--single & {
+        padding-left: 6px;
+    }
+}
+
+// Padding entre los items
+.vs__dropdown-option,
+.vs__no-options {
+    padding: $options-padding-y $options-padding-x;
+}
+
+.vs__selected {
+    // Texto del input cuando un item es seleccionado
+    .v-select.vs--single & {
+        // color: $texto;
+        margin-top: 5px;
+
+        // Transición para cuando el input adquiere el focus
+        transition: transform 0.2s ease;
+
+        input {
+            padding-left: 0;
+        }
+    }
+
+    // Desliza el texto del input a la derecha cuando adquiere el focus
+    .vs--single.vs--open & {
+        transform: translateX(5px);
+    }
+
+    // Ajuste de texto demasiado largo
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+}
+
+// Posicion del dropdown (menú desplegable)
+.vs__dropdown-menu {
+    top: calc(100% + 1rem);
+    border-style: none;
+    border-radius: 6px;
+    padding: 0;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+        background-color: rgba($primary, 0);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 50px;
+    }
+}
+
+// Estilo del input cuando el menú desplegable está abierto
+.vs--open .vs__dropdown-toggle {
+    border-color: $input-focus-border-color;
+    border-bottom-color: $input-focus-border-color;
+    border-bottom-left-radius: $vs-border-radius;
+    border-bottom-right-radius: $vs-border-radius;
+    box-shadow: $input-focus-box-shadow;
+}
+
+// Background del item seleccionado asi como el icono de check
+.vs__dropdown-option--selected {
+    background-color: $primary;
+    color: $white;
+    position: relative;
+
+    &::after {
+        content: "";
+        height: 1.1rem;
+        width: 1.1rem;
+        display: inline-block;
+        position: absolute;
+
+        // Centrado vertical del icono
+        top: 50%;
+        transform: translateY(-50%);
+        right: $options-padding-x;
+
+        // Icono
+        background-image: url(str-replace(
+            str-replace($check, "currentColor", $white),
+            "#",
+            "%23"
+        ));
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1.1rem;
+    }
+
+    &.vs__dropdown-option--highlight {
+        color: $white !important;
+        background-color: $primary !important;
+    }
+}

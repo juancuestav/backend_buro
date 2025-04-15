@@ -1,0 +1,185 @@
+// Body
+// $body-bg: rgba(0, 0, 0, 0.05);
+$body-bg: #fff;
+
+// Typography
+// $font-family-sans-serif: "Nunito", sans-serif;
+// $font-family-sans-serif: "Asap", sans-serif;
+
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// $primary: #7aa815;
+$primary: #f8aa1a;
+$secondary: #6e217f;
+$accent: #443462;
+// $primary: #1a1e21;
+$success: #7aa815;
+$danger: #d23326;
+$warning2: #f1a900;
+$secondary-light: #f7f7f7;
+$dorado: #c29868;
+
+.text-fs-5em {
+    font-size: 5em;;
+}
+
+.letter-spacing-1px {
+    letter-spacing: 1px;;
+}
+
+.window-height {
+    height: 100vh;
+}
+
+.text-color {
+    color: #545454;
+}
+
+.bg-button-success-light {
+    background-color: rgba(122, 168, 21, 1);
+}
+
+.bg-secondary-light {
+    background-color: $secondary-light;
+}
+
+.bg-gradient-dorado {
+    background: rgb(173, 140, 32);
+    background: linear-gradient(
+            90deg,
+            rgba(173, 140, 32, 1) 0%,
+            rgba(238, 234, 121, 1) 18%,
+            rgba(173, 140, 32, 1) 55%,
+            rgba(238, 234, 121, 1) 100%
+    );
+}
+
+.bg-body-dorado {
+    background-color: #f4f8db !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.p-6 {
+    padding: 4rem;
+}
+
+// Tabs
+.contenedor-tabs {
+    background-color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 8px 16px 16px 16px;
+    position: relative;
+    bottom: -8px;
+}
+
+// Custom scrollbar
+body {
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background-color: $body-bg;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 50px;
+    }
+}
+
+.separador {
+    color: #bbb;
+}
+
+// Input
+$input-font-size: 14px;
+$input-bg: #fff;
+// $input-border-radius: 0px;
+.form-control:focus {
+    border-color: $primary;
+    box-shadow: none;
+}
+
+// Buttons
+$btn-border-radius: 50px;
+
+// Card
+$card-border-width: 0;
+$card-border-radius: 16px;
+.card {
+    box-shadow: 0px 10px 80px -10px rgba(44, 54, 92, 0.2);
+}
+
+.no-box-shadow {
+    box-shadow: none !important;
+}
+
+// Modals
+$modal-header-border-color: rgba(0, 0, 0, 0);
+$modal-header-padding: 10px 20px;
+.modal-body {
+    padding-top: 4px !important;
+}
+
+$modal-content-border-width: 0;
+
+// Dropdown
+$enable-shadows: true;
+$dropdown-border-color: rgba(0, 0, 0, 0);
+$box-shadow: 0px 10px 80px -10px rgba(44, 54, 92, 0.2);
+$dropdown-link-color: $primary;
+$dropdown-item-padding-y: 0.5rem;
+$dropdown-font-size: 14px;
+
+.boton-cerrar-modal {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    z-index: 2000;
+    opacity: 1;
+    padding: 10px;
+    background-color: #fff !important;
+    box-shadow: 1px 1px 4px rgba(44, 54, 92, 0.6);
+    transition: all 0.15s ease;
+}
+
+.boton-cerrar-modal:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+// Toastification
+.whiteBackground {
+    background-color: #fff !important;
+    color: $primary !important;
+    padding: 16px 10px !important;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 4px #00000066;
+}
+
+// Salto de linea pdf
+.page-break {
+    page-break-before: always;
+}
+
+.bg-desenfoque {
+    background-color: rgba(#fff, .6) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.rounded-card {
+    border-radius: 16px !important;
+}
+
+.border-right-secondary {
+    border-right: 1px solid $secondary;
+}
+
+.border-left-secondary {
+    border-left: 1px solid $secondary;
+}

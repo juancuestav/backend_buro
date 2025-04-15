@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "strict": true, // Enable strict type-checking options
+        "skipLibCheck": true, // Skip type checking of declaration files
+        "noImplicitAny": false, // Bypass raising errors on `any` type
+        "jsx": "preserve",
+        "paths": {
+            "@/*": ["resources/js/*"],
+            "@app/*": ["resources/js/Pages/*"],
+            "@config/*": ["resources/js/config/*"],
+            "@shared/*": ["resources/js/shared/*"],
+            "@components/*": ["resources/js/shared/components/*"]
+        }
+    }
+}
