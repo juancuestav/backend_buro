@@ -85,6 +85,7 @@ $configuracion_general = ConfiguracionGeneral::first();
     <x-chat></x-chat>
 
     <input type="hidden" name="whatsapp" value="{{ $configuracion_general['whatsapp'] }}">
+    <input type="hidden" name="mensaje_whatsapp" value="{{ $configuracion_general['mensaje_whatsapp'] }}">
     <div class="social-networks">
         {{-- <div>
         <a href="https://play.google.com/store/apps/details?id=org.cordova.quasa.buroapp" target="_blank"
@@ -206,15 +207,14 @@ $configuracion_general = ConfiguracionGeneral::first();
 
         if (botonWhatsapp) {
             const link = document.createElement("a")
-            const celular = "0" + document.getElementsByName("whatsapp")[0].value
-            const phone = "593" + celular.substring(1, celular.length)
+            const phone = document.getElementsByName("whatsapp")[0].value
+            const message = document.getElementsByName("mensaje_whatsapp")[0].value
+            // const phone = "593" + celular.substring(1, celular.length)
 
             if (window.innerWidth < 768) {
-                // link.href = `https://api.whatsapp.com/send?phone=${phone}`
-                link.href = `https://api.whatsapp.com/send?phone=${phone}&text=Quiero%20mas%20informacion%20de%20mi%20buro%20de%20credito%20`
+                link.href = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
             } else {
-                link.href =    `https://web.whatsapp.com/send?phone=${phone}&text=Quiero%20mas%20informacion%20de%20mi%20buro%20de%20credito%20`
-                // link.href = `https://web.whatsapp.com/send?phone=${phone}`
+                link.href =    `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
             }
 
             link.target = "_blank"

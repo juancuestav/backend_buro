@@ -45,6 +45,7 @@
                             <i class="bi-bookmark-check-fill me-2 text-success"></i>TU COMPRA ES SEGURA
                         </div>
                         <input type="hidden" name="whatsapp" value="{{ Config::get('buro.whatsapp') }}">
+                        <input type="hidden" name="mensaje_whatsapp" value="{{ Config::get('buro.mensaje_whatsapp') }}">
 
                         <div id="boton-whatsapp"></div>
                         {{-- <button class="btn btn-success text-white mb-4">
@@ -402,13 +403,14 @@
 
         if (botonWhatsapp) {
             const link = document.createElement("a")
-            const celular = "0" + document.getElementsByName("whatsapp")[0].value
-            const phone = "593" + celular.substring(1, celular.length)
+            const phone = document.getElementsByName("whatsapp")[0].value
+            const message = document.getElementsByName("mensaje_whatsapp")[0].value
+            // const phone = "593" + celular.substring(1, celular.length)
 
             if (window.innerWidth < 768) {
-                link.href = `https://api.whatsapp.com/send?phone=${phone}`
+                link.href = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
             } else {
-                link.href = `https://web.whatsapp.com/send?phone=${phone}`
+                link.href = `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
             }
 
             link.target = "_blank"
