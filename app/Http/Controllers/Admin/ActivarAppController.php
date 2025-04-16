@@ -23,14 +23,14 @@ class ActivarAppController extends Controller
         $facturacion = FacturacionPlan::where('usuario', Auth::id())->first();
         $fecha_proximo_pago = $facturacion?->proximo_pago;
         $pagado = $facturacion?->pagado;
-        $planes = ServicioResource::collection(Servicio::activo()->esPlan()->get())->all();
+        $planesClientes = ServicioResource::collection(Servicio::activo()->esPlan()->get())->all();
+        $planesEmpresas = ServicioResource::collection(Servicio::activo()->esSolucionesEmpresas()->get())->all();
         // $celular = Config::get('buro.whatsapp');
 
         /* if($facturacion) {
             $this->verificarFechaFacturacion($facturacion);
         } */
-        // return Inertia::render('activarApp/view/ActivarAppPage.vue', compact('planes', 'facturacion', 'celular'));
-        return response()->json(compact('planes', 'fecha_proximo_pago', 'pagado'));
+        return response()->json(compact('planesClientes', 'planesEmpresas', 'fecha_proximo_pago', 'pagado'));
     }
 
     public function pagado() {

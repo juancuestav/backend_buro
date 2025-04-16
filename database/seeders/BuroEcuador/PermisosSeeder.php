@@ -57,7 +57,7 @@ class PermisosSeeder extends Seeder
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'notificaciones_generales'])->syncRoles([$administrador, $cliente, $empleado]);
         Permission::firstOrCreate(['name' => Permisos::VER . 'notificaciones_generales'])->syncRoles([$administrador, $cliente, $empleado]);
 
-        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'chat_linea'])->syncRoles([$administrador, $cliente, $empleado]);
+        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'chat_linea'])->syncRoles([$administrador, $cliente, $empleado, $empresa]);
 
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'facturacion_planes'])->syncRoles([$administrador, $empleado]);
         Permission::firstOrCreate(['name' => Permisos::VER . 'facturacion_planes'])->syncRoles([$administrador, $empleado]);
@@ -127,7 +127,7 @@ class PermisosSeeder extends Seeder
          * Modulo base de datos
          ************************/
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'dashboard_precalifica'])->syncRoles([$administrador]);
-        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'modulo_bases_de_datos'])->syncRoles([$administrador, $empleado, $empresa]);
+        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'modulo_bases_de_datos'])->syncRoles([$administrador, $empleado, $empresa, $cliente]);
         // Registro civil
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'registro_civil'])->syncRoles([$administrador, $empleado, $empresa]);
         Permission::firstOrCreate(['name' => Permisos::VER . 'registro_civil'])->syncRoles([$administrador, $empleado, $empresa]);
@@ -144,8 +144,8 @@ class PermisosSeeder extends Seeder
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'sri'])->syncRoles([$administrador, $empleado, $empresa]);
         Permission::firstOrCreate(['name' => Permisos::VER . 'sri'])->syncRoles([$administrador, $empleado, $empresa]);
         // Busqueda general
-        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'busqueda_general'])->syncRoles([$administrador, $empleado, $empresa]);
-        Permission::firstOrCreate(['name' => Permisos::VER . 'busqueda_general'])->syncRoles([$administrador, $empleado, $empresa]);
+        Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'busqueda_general'])->syncRoles([$administrador, $empleado, $empresa, $cliente]);
+        Permission::firstOrCreate(['name' => Permisos::VER . 'busqueda_general'])->syncRoles([$administrador, $empleado, $empresa, $cliente]);
 
         // Super administrador
         Permission::firstOrCreate(['name' => Permisos::ACCEDER . 'roles']);

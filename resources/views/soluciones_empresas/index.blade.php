@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="text-center">
                                         <i class="bi-bookmark-check-fill me-2 text-success"></i>TU COMPRA ES SEGURA </br>
-                                        <small>*Planes no contienen reporte completo de crédito, únicamente muestran información preliminar.</small>
+                                        <small>*Buró de crédito muestra información preliminar.</small>
                                     </div>
                                 </div>
                             </div>

@@ -10,10 +10,19 @@ class AntController extends Controller
 {
     public function index()
     {
-        $results = DB::connection('sqlite_ant')
+        if (request('cedula')) {
+            $results = DB::connection('sqlite_ant')
             ->table('ant')
-            ->where('identificacion', request('search'))
+            ->where('identificacion', request('cedula'))
             ->get();
+        }
+
+        if (request('placa')) {
+            $results = DB::connection('sqlite_ant')
+            ->table('ant')
+            ->where('placa', request('placa'))
+            ->get();
+        }
 
         return response()->json(compact('results'));
     }
