@@ -34,6 +34,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\UserInfoResource;
 use App\Http\Controllers\Admin\NotificacionController as NotificacionFormularioContactoController;
+use App\Http\Controllers\Admin\PayPhoneController;
 use App\Http\Controllers\Admin\UserProfileController;
 use App\Http\Controllers\Sistema\DashboardPrecalificaController;
 use App\Http\Controllers\Sistema\PermisoRolController;

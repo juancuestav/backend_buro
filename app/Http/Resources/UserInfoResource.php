@@ -43,6 +43,7 @@ class UserInfoResource extends JsonResource
             'estado_verificacion' => $this->estado_verificacion,
             'user_profile_id' => $this->userProfile->id,
             'limite_consultas' => $this->userProfile->limite_consultas,
+            'link_verificacion' => $this->userProfile->link_verificacion,
             'consultas_realizadas' => $this->consultasRealizadas()
         ];
 

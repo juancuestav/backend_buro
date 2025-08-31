@@ -2,112 +2,28 @@
 
 @section('content')
     <div class="px-5 pt-4" style="margin-bottom: calc(100vh - 550px)">
-        {{-- <div class="row d-flex align-items-center mx-auto scale-in g-0 w-75">
-            <div class="col-md-4 px-4">
-                <h5 class="text-fs-5em mb-4">Comenzar</h5>
-                <h5 class="fs-4 letter-spacing-1px text-secondary mb-4">Adquiere nuestros planes y servicios</h5>
-                <p class="fs-5 mb-4">Solicita tu crédito ágil, fácil y rápido. Contamos con convenio con diferentes instituciones financieras del pais.</p>
 
-                <a class="btn btn-primary px-4 py-3 rounded-pill fw-bold" href="{{ route('contacto') }}">Contáctanos</a>
-            </div>
-            <div class="col-md-8">
-                <img class="w-100 contactanos" src="{{ asset('img/contactanos.png') }}" alt="">
-            </div>
-        </div> --}}
-
-        <div class="row py-3 mb-3">
-            <div class="col-12 col-md-6">
-                <h6 class="mb-5 text-center">Score anterior</h6>
-                <div class="py-4 mb-4 contador1">
-                    <div class="color_fondo1"></div>
-                    <div class="numero1"></div>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-                <h6 class="mb-5 text-center">Score mejorado</h6>
-                <div class="py-4 mb-4 contador2">
-                    <div class="color_fondo2"></div>
-                    <div class="numero2"></div>
-                </div>
-            </div>
-
-            <small class="d-block text-center">Calculado por <b>Buró de Crédito Ecuador</b></small>
-            <small class="d-block text-center">*Para conocer tu score crediticio debes adquirir un reporte o plan</small>
-        </div>
-
-        {{-- <div class="row text-center mb-5">
-            <div class="col-12 col-md-6 mx-auto">
-                <a href="#faq" class="text-dark d-block text-decoration-none mb-4 fw-bold">Preguntas frecuentes</a>
-                <button class="btn btn-primary rounded-pill px-3 fw-bold" id="mostrarReportes">Ver mi informe crediticio</button>
-                <button class="btn btn-primary rounded-pill px-3 fw-bold" id="mostrarMejoramientos">Mejorar mi score</button>
-            </div>
-        </div> --}}
-
-        {{-- Reportes --}}
-        @if (count($reportes) > 0)
-            <h5 class="pt-4 text-blue">Conoce nuestros servicios</h5>
-            <div id="reportes" class="row row-cols-md-4 row-cols-1 pt-4 mb-4">
-                @foreach ($reportes as $plan)
-                    <div class="col mb-2">
-                        <div class="rounded-card gradiente-azul-morado text-white h-100">
-                            {{-- Imagen --}}
-                            <div class="card-body h-100">
-                                <div class="text-center">
-                                    <img width="100px" class="mb-4"
-                                        src="{{ $plan->images?->url ?? url('img/logo.webp') }}" alt="">
-                                </div>
-
-                                {{-- Contenido --}}
-                                <div class="w-100">
-                                    <h4 class="fw-bold text-center mb-4">{{ $plan->nombre }}</h4>
-                                    <div class="mb-4 text-black rounded-card bg-desenfoque p-2">{!! $plan->descripcion !!}
-                                    </div>
-
-                                    <div class="fs-4 text-center fw-bold">
-                                        {{ '$' . priceFormat($plan->precio_unitario + $plan->iva) }}</div>
-
-                                    @if ($plan->gravable)
-                                        <div class="text-center">IVA incluido</div>
-                                    @else
-                                        <small class="text-center d-block">Precio final (No incluye IVA)</small>
-                                    @endif
-
-                                    <div class="text-center text-md-start my-3">
-                                        <a href="{{ $plan->url_destino }}" target="_blank"
-                                            class="btn btn-primary fw-bold w-100">Obtener ahora
-                                        </a>
-                                    </div>
-                                    <div class="text-center">
-                                        <i class="bi-bookmark-check-fill me-2 text-success"></i>TU COMPRA ES SEGURA
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            {{--  @else
-            <p class="ps-3 pt-3 text-white">Aún no se han agregado planes!</p> --}}
-        @endif
 
         {{-- Servicios de mejoramiento --}}
-        <h5 class="pt-4 text-morado">Conoce nuestros planes</h5>
+        {{--   <h5 class="pt-4 text-morado">Conoce nuestros planes</h5> --}}
+        <div class="section-header">
+            <h2 class="section-title mb-2">Conoce nuestros planes de mejoramiento</h2>
+        </div>
         @if (count($mejoramientos) > 0)
             <div id="mejoramientos" class="row row-cols-md-3 row-cols-1 pt-4 mb-4">
                 @foreach ($mejoramientos as $plan)
                     <div class="col mb-2">
-                        <div class="rounded-card bg-morado text-white">
+                        <div class="p-3 rounded-card gradiente-azul-morado text-white">
                             {{-- Imagen --}}
                             <div class="card-body">
-                                <img class="w-100 mb-4 rounded" src="{{ $plan->images?->url ?? url('img/logo.webp') }}"
-                                    alt="">
+                                {{-- <img class="w-100 mb-4 rounded" src="{{ $plan->images?->url ?? url('img/logo.webp') }}"
+                                    alt=""> --}}
 
                                 {{-- Contenido --}}
                                 <div class="w-100">
                                     <h4 class="fw-bold text-center mb-4">{{ $plan->nombre }}</h4>
-                                    <div class="mb-4 text-black bg-desenfoque rounded-card p-2">{!! $plan->descripcion !!}</div>
+                                    <div class="mb-4 text-black bg-desenfoque rounded-card p-2">{!! $plan->descripcion !!}
+                                    </div>
 
                                     <div class="fs-4 fw-bold text-center">
                                         {{ '$' . priceFormat($plan->precio_unitario + $plan->iva) }}</div>
@@ -119,9 +35,12 @@
                                     @endif
 
                                     <div class="text-center text-md-start my-3">
-                                        <a href="{{ $plan->url_destino }}" target="_blank"
+                                        <a href="{{ route('public.servicios.show', $plan) }}"
+                                            class="btn btn-primary fw-bold px-3 rounded-pill my-3 w-100">Obtener ahora
+                                            <i class="bi-chevron-right"></i></a>
+                                        {{-- <a href="{{ $plan->url_destino }}" target="_blank"
                                             class="btn btn-primary fw-bold w-100">Obtener ahora
-                                        </a>
+                                        </a> --}}
                                         {{-- <a href="{{ route('planes.show', $plan) }}" class="btn btn-success text-white w-100">Conocer
                                          más</a> --}}
                                     </div>
@@ -141,121 +60,173 @@
              <p class="ps-3 pt-3 text-white">Aún no se han agregado planes!</p> --}}
         @endif
 
-        <h6 class="fw-bold text-center pt-4 mb-3">Segmentación del riesgo</h6>
-        <table class="table mb-4">
-            <thead>
-                <tr>
-                    <th>Segmentación</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr style="background-color: #0cdd77">
-                    <td>AAA - Cliente excelente</td>
-                    <td>930 - 999 puntos</td>
-                </tr>
-                <tr style="background-color: #beff6f">
-                    <td>AA - Cliente bueno</td>
-                    <td>850 - 929</td>
-                </tr>
-                <tr style="background-color: #f7fee7">
-                    <td>A - Cliente regular</td>
-                    <td>700 - 849</td>
-                </tr>
-                <tr style="background-color: #fef200">
-                    <td>B - Cliente bajo</td>
-                    <td>400 - 699</td>
-                </tr>
-                <tr style="background-color: #ff0600">
-                    <td>C - Cliente malo</td>
-                    <td>Bajo 400</td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <h6 id="faq" class="fw-bold text-center py-4">Preguntas frecuentes</h6>
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false"
-                aria-controls="collapseExample1">
-                <b>1. Crea tu historial crediticio</b>
-                <i class="bi-chevron-down"></i>
+        <!-- Risk Segmentation Section -->
+        <section class="risk-section">
+            <div class="section-header">
+                <h2 class="section-title mb-4">Segmentación del riesgo</h2>
+                <div class="section-divider"></div>
             </div>
-            <div class="collapse show" id="collapseExample1">
-                <div class="px-3 pb-3 bg-white">
-                    El historial crediticio se empieza a construir al momento de sacar un crédito, lo ideal es tener por lo
-                    menos una línea de crédito. Esto puede ser a través de una tarjeta de crédito, un crédito directo en una
-                    empresa o un crédito en una institución financiera, como un banco, cooperativa. El propósito es
-                    demostrar que podemos cumplir con nuestros compromisos de pago, dado que, si no registramos operaciones
-                    crediticias abiertas, las entidades no tienen información sobre nosotros para poder tomar una decisión.
+
+            <div class="risk-table-container">
+                <div class="risk-table">
+                    <div class="risk-row risk-aaa">
+                        <div class="risk-label">
+                            <span class="risk-grade">AAA</span>
+                            <span class="risk-desc">Cliente excelente</span>
+                        </div>
+                        <div class="risk-score">930 - 999 puntos</div>
+                    </div>
+                    <div class="risk-row risk-aa">
+                        <div class="risk-label">
+                            <span class="risk-grade">AA</span>
+                            <span class="risk-desc">Cliente bueno</span>
+                        </div>
+                        <div class="risk-score">850 - 929</div>
+                    </div>
+                    <div class="risk-row risk-a">
+                        <div class="risk-label">
+                            <span class="risk-grade">A</span>
+                            <span class="risk-desc">Cliente regular</span>
+                        </div>
+                        <div class="risk-score">700 - 849</div>
+                    </div>
+                    <div class="risk-row risk-b">
+                        <div class="risk-label">
+                            <span class="risk-grade">B</span>
+                            <span class="risk-desc">Cliente bajo</span>
+                        </div>
+                        <div class="risk-score">400 - 699</div>
+                    </div>
+                    <div class="risk-row risk-c">
+                        <div class="risk-label">
+                            <span class="risk-grade">C</span>
+                            <span class="risk-desc">Cliente malo</span>
+                        </div>
+                        <div class="risk-score">Bajo 400</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false"
-                aria-controls="collapseExample2">
-                <b>2. Paga tus deudas a tiempo</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample2">
-                <div class="px-3 pb-3 bg-white">
-                    Tener un sólido historial de pagar las deudas a tiempo crea un buen puntaje a lo largo del tiempo. En
-                    tiempos pre-pandemia en Ecuador las deudas pasaban como vencidas a los 15 días de falta de pago; por
-                    temas de pandemia hasta diciembre del 2021, las deudas pasarán como vencidas a los 61 días de falta de
-                    pago. Mientras más tiempo pagues puntualmente tus deudas, mejor score tendrás.
+        <section class="faq-section mb-4 py-5 bg-light" id="faq">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <h2 class="section-title mb-3">Preguntas frecuentes</h2>
+                    <div class="section-divider mx-auto"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="accordion custom-accordion" id="faqAccordion">
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq1">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                        1. Crea tu historial crediticio
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        El historial crediticio se empieza a construir al momento de sacar un crédito, lo
+                                        ideal es tener por lo
+                                        menos una línea de crédito. Esto puede ser a través de una tarjeta de crédito, un
+                                        crédito directo en una
+                                        empresa o un crédito en una institución financiera, como un banco, cooperativa. El
+                                        propósito es
+                                        demostrar que podemos cumplir con nuestros compromisos de pago, dado que, si no
+                                        registramos operaciones
+                                        crediticias abiertas, las entidades no tienen información sobre nosotros para poder
+                                        tomar una decisión.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq2">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false"
+                                        aria-controls="collapse2">
+                                        2. Paga tus deudas a tiempo
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Tener un sólido historial de pagar las deudas a tiempo crea un buen puntaje a lo
+                                        largo del tiempo. En
+                                        tiempos pre-pandemia en Ecuador las deudas pasaban como vencidas a los 15 días de
+                                        falta de pago; por
+                                        temas de pandemia hasta diciembre del 2021, las deudas pasarán como vencidas a los
+                                        61 días de falta de
+                                        pago. Mientras más tiempo pagues puntualmente tus deudas, mejor score tendrás.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq3">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
+                                        aria-controls="collapse3">
+                                        3. Si tienes obligaciones vencidas ponte al día
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Pagar tus deudas vencidas da una buena señal de tu compromiso de pago al sistema
+                                        financiero y comercial.
+                                        Nunca es muy tarde para pagar una deuda, recuerda que los intereses se siguen
+                                        acumulando y algo que
+                                        empezó como una deuda relativamente pequeña puede llegar a ser significativa si se
+                                        deja acumular. Esto
+                                        refleja que en el pasado tuviste “errores” pero que tu conducta como sujeto de
+                                        crédito está mejorando.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                        aria-controls="collapse4">
+                                        4. Mantén bajos los balances de tu tarjeta de crédito
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Altos niveles de deuda pueden bajar tu score.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                        aria-controls="collapse4">
+                                        5. Aplica a nuevas líneas de crédito solo cuando las necesitas
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        No podemos hacer huecos para tapar huecos, siempre nos van a quedar, ya sea huecos
+                                        más grandes o huecos
+                                        sin tapar. Es decir, no podemos sacar nuevas líneas de crédito para pagar otras
+                                        deudas, porque se
+                                        vuelven un ciclo vicioso.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false"
-                aria-controls="collapseExample3">
-                <b>3. Si tienes obligaciones vencidas ponte al día</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample3">
-                <div class="px-3 pb-3 bg-white">
-                    Pagar tus deudas vencidas da una buena señal de tu compromiso de pago al sistema financiero y comercial.
-                    Nunca es muy tarde para pagar una deuda, recuerda que los intereses se siguen acumulando y algo que
-                    empezó como una deuda relativamente pequeña puede llegar a ser significativa si se deja acumular. Esto
-                    refleja que en el pasado tuviste “errores” pero que tu conducta como sujeto de crédito está mejorando.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false"
-                aria-controls="collapseExample4">
-                <b>4. Mantén bajos los balances de tu tarjeta de crédito</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample4">
-                <div class="px-3 pb-3 bg-white">
-                    Altos niveles de deuda pueden bajar tu score.
-                </div>
-            </div>
-        </div>
-
-        <div class="card mb-4">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample5" aria-expanded="false"
-                aria-controls="collapseExample5">
-                <b>5. Aplica a nuevas líneas de crédito solo cuando las necesitas</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample5">
-                <div class="px-3 pb-3 bg-white">
-                    No podemos hacer huecos para tapar huecos, siempre nos van a quedar, ya sea huecos más grandes o huecos
-                    sin tapar. Es decir, no podemos sacar nuevas líneas de crédito para pagar otras deudas, porque se
-                    vuelven un ciclo vicioso.
-                </div>
-            </div>
-        </div>
+        </section>
 
         <div class="row text-center">
             <div class="col-12 col-md-6 mx-auto">
@@ -270,6 +241,39 @@
 
 @section('css')
     <style>
+        /* FAQ Section */
+        .custom-accordion .accordion-item {
+            border: none;
+            box-shadow: var(--shadow-soft);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .custom-accordion .accordion-button {
+            background: white;
+            border: none;
+            color: #443462;
+            font-weight: 600;
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .custom-accordion .accordion-button:not(.collapsed) {
+            background: #443462;
+            color: white;
+            box-shadow: none;
+        }
+
+        .custom-accordion .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(68, 52, 98, 0.25);
+        }
+
+        .custom-accordion .accordion-body {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
         .text {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -411,42 +415,96 @@
         th {
             border: 1px solid #ccc;
         }
+
+        /* Risk Section */
+        .risk-section {
+            margin-bottom: 80px;
+        }
+
+        .risk-table-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .risk-table {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .risk-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .risk-row:last-child {
+            border-bottom: none;
+        }
+
+
+
+        .risk-label {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .risk-grade {
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 2px 12px;
+            border-radius: 8px;
+            background: white;
+            color: var(--dark-color);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .risk-desc {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .risk-score {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 1.1rem;
+        }
+
+        .risk-aaa {
+            background: linear-gradient(135deg, #0cdd77, #00b359);
+        }
+
+        .risk-aa {
+            background: linear-gradient(135deg, #beff6f, #9fd650);
+        }
+
+        .risk-a {
+            background: linear-gradient(135deg, #f7fee7, #e8f5c8);
+        }
+
+        .risk-b {
+            background: linear-gradient(135deg, #fef200, #e6d900);
+        }
+
+        .risk-c {
+            background: linear-gradient(135deg, #ff0600, #cc0500);
+        }
+
+        .risk-c .risk-desc,
+        .risk-c .risk-score {
+            color: white;
+        }
     </style>
 @endsection
 
 
 @section('js')
-    {{-- Contadores --}}
-    <script>
-        const color2 = document.getElementsByClassName('color_fondo2')[0]
-        const numero2 = document.getElementsByClassName('numero2')[0]
-        let cantidad2 = 0
-        let tiempo2 = setInterval(() => {
-
-            cantidad2 += 1
-
-            if (cantidad2 <= 100) color2.style.height = `${cantidad2}%`
-            numero2.textContent = cantidad2
-            if (cantidad2 === 960) {
-                clearInterval(tiempo2)
-            }
-        }, 40);
-
-        const color1 = document.getElementsByClassName('color_fondo1')[0]
-        const numero1 = document.getElementsByClassName('numero1')[0]
-        let cantidad1 = 0
-        let tiempo1 = setInterval(() => {
-
-            cantidad1 += 1
-
-            if (cantidad1 <= 100) color1.style.height = `${cantidad1}%`
-            numero1.textContent = cantidad1
-            if (cantidad1 === 250) {
-                clearInterval(tiempo1)
-            }
-        }, 100);
-    </script>
-
     {{-- Botones --}}
     <script>
         const mostrarMejoramientos = document.getElementById('mostrarMejoramientos');

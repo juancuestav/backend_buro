@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\BasesDatos\RegistroCivilController;
+use App\Http\Controllers\Admin\PayPhoneController;
+use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Sistema\ConfiguracionGeneralController;
 use App\Models\Ciudad;
@@ -11,7 +13,12 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [LoginController::class, 'login']);
 Route::post('registrar', [LoginController::class, 'registrar']);
 Route::get('configuraciones-generales', [ConfiguracionGeneralController::class, 'index']);
+Route::get('servicios/{servicio}', [ServicioController::class, 'show']);
 Route::post('configuraciones-generales', [ConfiguracionGeneralController::class, 'store']);
 Route::get('tipos-identificaciones', fn () => response()->json(['results' => TipoIdentificacion::all()]));
 Route::get('provincias', fn () => response()->json(['results' => Provincia::all()]));
 Route::get('ciudades', fn () => response()->json(['results' => Ciudad::filter()->get()]));
+
+// Pagos con Payphone
+Route::post('/payphone/webhook', [PayPhoneController::class, 'handleWebhook']);
+Route::post('/payphone/pagar', [PayPhoneController::class, 'pagar']);

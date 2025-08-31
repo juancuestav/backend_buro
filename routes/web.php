@@ -83,3 +83,4 @@ Route::get('/carrito/linea-pedido/{linea_pedido}/delete', [CarritoController::cl
 Route::get('carrito/pedido/{pedido}', [CarritoController::class, 'mostrarDetallesPedido'])->name('carrito.mostrar_detalles_pedido');*/
 
 Route::view('/solicitud-credito', 'solicitud_credito.index')->name('solicitud_credito.index');
+Route::view('/congratulations', 'carrito.congratulations')->name('carrito.congratulations');

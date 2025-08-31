@@ -11,6 +11,7 @@ use App\Models\Provincia;
 use App\Models\Servicio;
 use App\Models\Sistema\ConfiguracionGeneral;
 use App\Models\TipoIdentificacion;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -41,7 +42,7 @@ class ServicioController extends Controller
         $provincias = Provincia::all();
         // $ciudades = Ciudad::all();
         $ciudades = Ciudad::where('provincia', $provincias->first()->id)->get();
-        Log::channel('testing')->info('Log', ['ciudades', $ciudades]);
+        // Log::channl('testing')->info('Log', ['ciudades', $ciudades]);
 
         $si_no_nose = ['', 'SI', 'NO', 'NO SE'];
         $si_no = ['', 'SI', 'NO'];
@@ -72,13 +73,14 @@ class ServicioController extends Controller
         $tiene_deudas = $request['tiene_deudas'];
         $es_cliente = $request['es_cliente'];
 
-        $marketing_encontrado = Marketing::where('identificacion', $request['identificacion'])->first();
-        $marketing = null;
+        // pendiente de corregir - 2025-04-20
+        /* $marketing_encontrado = Marketing::where('identificacion', $request['identificacion'])->first();
         if (!$marketing_encontrado) {
             $marketing = Marketing::create($request->all());
-        } else {
-            $marketing = $marketing_encontrado;
-        }
+            } else {
+                $marketing = $marketing_encontrado;
+        } */
+        $user_found = User::where('identificacion', $request['identificacion'])->first();
 
         $pedido = new Pedido();
         $pedido->fecha_emision = date('Y-m-d');
@@ -87,12 +89,15 @@ class ServicioController extends Controller
         $pedido->iva = $servicio->iva;
         $pedido->servicio = $servicio->id;
         $pedido->total = $servicio->precio_unitario + $servicio->iva;
-        $pedido->marketing = $marketing->id;
+        $pedido->marketing = null;
+        $pedido->user_id = $user_found?->id;
         $pedido->tiene_reporte = $tiene_reporte;
         $pedido->conoce_puntaje = $conoce_puntaje;
         $pedido->tiene_deudas = $tiene_deudas;
         $pedido->es_cliente = $es_cliente;
         $pedido->save();
+
+        session(['identificacion' => $request['identificacion']]);
         return redirect('pagar-servicio/' . $servicio->id);
         // return back()->with('status', 'Gracias por adquirir éste servicio!');
     }
@@ -102,7 +107,7 @@ class ServicioController extends Controller
     {
         $servicio = Servicio::find($servicio);
         $configuracion_general = ConfiguracionGeneral::first();
-        
+
         if ($servicio) {
             return view('servicios.pagar_servicio', compact('servicio', 'configuracion_general'));
         }
@@ -113,12 +118,12 @@ class ServicioController extends Controller
     {
         $categorias = Categoria::orderBy('orden')->get();
         $servicios = Servicio::activo()->esServicio()->get();
-        $serviciosSinCategoria = $servicios->filter(fn ($servicio) => is_null($servicio->categoria));
+        $serviciosSinCategoria = $servicios->filter(fn($servicio) => is_null($servicio->categoria));
 
         $data = [];
 
         foreach ($categorias as $categoria) {
-            $serviciosFiltrados = $servicios->filter(fn ($servicio) => $servicio->categoria == $categoria->id);
+            $serviciosFiltrados = $servicios->filter(fn($servicio) => $servicio->categoria == $categoria->id);
             array_push($data, ['nombre_categoria' => $categoria->nombre, 'id_categoria' => $categoria->id, 'values' => [...$serviciosFiltrados]]);
         }
 

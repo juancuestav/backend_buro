@@ -15,7 +15,7 @@
             <div id="reportes" class="row row-cols-md-4 row-cols-1 pt-4 mb-4">
                 @foreach ($solucionesEmpresas as $plan)
                     <div class="col mb-2">
-                        <div class="rounded-card h-100 gradiente-azul-morado text-white">
+                        <div class="card rounded-card h-100 gradiente-azul-morado text-white">
                             {{-- Imagen --}}
                             <div class="card-body h-100">
                                 @if ($plan->images?->url)
@@ -40,9 +40,12 @@
                                     @endif
 
                                     <div class="text-center text-md-start my-3">
-                                        <a href="{{ $plan->url_destino }}" target="_blank"
+                                        {{-- <a href="{{ $plan->url_destino }}" target="_blank"
                                             class="btn btn-primary fw-bold w-100">Obtener ahora
-                                        </a>
+                                        </a> --}}
+                                        <a href="{{ route('public.servicios.show', $plan) }}"
+                                            class="btn btn-primary fw-bold px-3 rounded-pill my-3 w-100">Adquirir servicio
+                                            <i class="bi-chevron-right"></i></a>
                                     </div>
                                     <div class="text-center">
                                         <i class="bi-bookmark-check-fill me-2 text-success"></i>TU COMPRA ES SEGURA </br>

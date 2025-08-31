@@ -25,8 +25,8 @@ return new class extends Migration
 			$table->double('iva')->default(0);
 			$table->boolean('es_plan')->default(false);
 			$table->string('url_video')->nullable();
-			$table->string('url_destino')->nullable(); // pago por payphone
-            $table->string('url_paypal')->nullable();
+			$table->string('url_destino')->nullable(); // pago por payphone - nacional
+            $table->string('url_paypal')->nullable(); // internacional
 
 			$table->unsignedBigInteger('categoria')->nullable();
 			$table->foreign('categoria')->references('id')->on('categorias')->onDelete('set null')->onUpdate('cascade');

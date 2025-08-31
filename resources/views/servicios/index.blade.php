@@ -29,7 +29,7 @@
             <div class="row row-cols-md-3 row-cols-1 pt-4">
                 @foreach ($servicios as $servicio)
                     <div class="col mb-5">
-                        <div class="rounded-card card-body h-100 gradiente-azul-morado text-white">
+                        <div class="card rounded-card card-body h-100 gradiente-azul-morado text-white">
                             <div class="text-center">
                                 <img width="100px" class="mb-4" src="{{ url($servicio->images->url ?? '') }}"
                                     alt="">

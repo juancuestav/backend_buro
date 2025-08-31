@@ -127,9 +127,9 @@ class LoginController extends Controller
 
             if (env('APP_ID', '1') == User::APP_ID_BURO_CREDITO_ECUADOR) Mail::to($user->email)->send(new VerificarEmailMail($codigo_verificacion));
 
-            return $this->login($request);
+            // return $this->login($request);
 
-            //return $user;
+            return $user;
         });
     }
 }

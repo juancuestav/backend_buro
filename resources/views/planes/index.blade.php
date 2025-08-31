@@ -2,50 +2,13 @@
 
 @section('content')
     <div class="px-5 pt-4" style="margin-bottom: calc(100vh - 550px)">
-        {{-- <div class="row d-flex align-items-center mx-auto scale-in g-0 w-75">
-            <div class="col-md-4 px-4">
-                <h5 class="text-fs-5em mb-4">Comenzar</h5>
-                <h5 class="fs-4 letter-spacing-1px text-secondary mb-4">Adquiere nuestros planes y servicios</h5>
-                <p class="fs-5 mb-4">Solicita tu crédito ágil, fácil y rápido. Contamos con convenio con diferentes instituciones financieras del pais.</p>
-
-                <a class="btn btn-primary px-4 py-3 rounded-pill fw-bold" href="{{ route('contacto') }}">Contáctanos</a>
-            </div>
-            <div class="col-md-8">
-                <img class="w-100 contactanos" src="{{ asset('img/contactanos.png') }}" alt="">
-            </div>
-        </div> --}}
-
-        <div class="row py-3 mb-4">
-            <div class="col-12 col-md-6">
-                <x-contador titulo="¿Tu score crediticio es?" cantidad="23"></x-contador>
-            </div>
-            <div class="col-12 col-md-6 mb-4">
-                <!--<x-contador titulo="¿Tu score sobreendeudamiento es?"></x-contador>-->
-                <h6 class="mb-5 text-center">¿Tu score sobreendeudamiento es?</h6>
-                <div class="py-4 mb-4 contador2">
-                    <div class="color_fondo2"></div>
-                    <div class="numero2"></div>
-                </div>
-            </div>
-            <small class="d-block text-center">Calculado por <b>Buró de Crédito Ecuador</b></small>
-            <small class="d-block text-center">*Para conocer tu score crediticio debes adquirir un reporte o plan</small>
-        </div>
-
-        {{-- <div class="row text-center mb-5">
-            <div class="col-12 col-md-6 mx-auto">
-                <a href="#faq" class="text-dark d-block text-decoration-none mb-4 fw-bold">Preguntas frecuentes</a>
-                <button class="btn btn-primary rounded-pill fw-bold px-3" id="mostrarReportes">Ver mi informe crediticio</button>
-                <button class="btn btn-primary rounded-pill fw-bold px-3" id="mostrarMejoramientos">Mejorar mi score</button>
-            </div>
-        </div> --}}
-
         {{-- Reportes --}}
         @if (count($reportes) > 0)
             <h5 class="pt-4 text-blue">Conoce nuestros servicios</h5>
             <div id="reportes" class="row row-cols-md-4 row-cols-1 pt-4 mb-4">
                 @foreach ($reportes as $plan)
                     <div class="col mb-2">
-                        <div class="rounded-card h-100 gradiente-azul-morado text-white">
+                        <div class="card rounded-card h-100 gradiente-azul-morado text-white">
                             {{-- Imagen --}}
                             <div class="card-body h-100">
                                 <div class="text-center">
@@ -69,9 +32,12 @@
                                     @endif
 
                                     <div class="text-center text-md-start my-3">
-                                        <a href="{{ $plan->url_destino }}" target="_blank"
-                                            class="btn btn-primary fw-bold w-100">Obtener ahora
-                                        </a>
+                                        <a href="{{ route('public.servicios.show', $plan) }}"
+                                            class="btn btn-primary fw-bold px-3 rounded-pill mt-1 w-100">Obtener ahora
+                                            <i class="bi-chevron-right"></i></a>
+                                        <a href="https://recurring.pagomedios.com/buro-credito-ecuador"
+                                            class="btn btn-light fw-bold px-3 rounded-pill my-3 w-100">Suscribirme
+                                            <i class="bi-chevron-right"></i></a>
                                     </div>
                                     <div class="text-center">
                                         <i class="bi-bookmark-check-fill me-2 text-success"></i>TU COMPRA ES SEGURA
@@ -83,8 +49,6 @@
                     </div>
                 @endforeach
             </div>
-            {{--  @else
-            <p class="ps-3 pt-3 text-white">Aún no se han agregado planes!</p> --}}
         @endif
 
         {{-- Servicios de mejoramiento --}}
@@ -93,7 +57,7 @@
             <div id="mejoramientos" class="row row-cols-md-3 row-cols-1 pt-4 mb-4">
                 @foreach ($mejoramientos as $plan)
                     <div class="col mb-2">
-                        <div class="rounded-card bg-morado text-white">
+                        <div class="p-3 rounded-card bg-morado text-white">
                             {{-- Imagen --}}
                             <div class="card-body">
                                 <div class="text-center">
@@ -117,9 +81,12 @@
                                     @endif
 
                                     <div class="text-center text-md-start my-3">
-                                        <a href="{{ $plan->url_destino }}" target="_blank"
+                                        <a href="{{ route('public.servicios.show', $plan) }}"
+                                            class="btn btn-primary fw-bold px-3 rounded-pill my-3 w-100">Obtener ahora
+                                            <i class="bi-chevron-right"></i></a>
+                                        {{-- <a href="{{ $plan->url_destino }}" target="_blank"
                                             class="btn btn-primary fw-bold w-100">Obtener ahora
-                                        </a>
+                                        </a> --}}
                                         {{-- <a href="{{ route('planes.show', $plan) }}" class="btn btn-success text-white w-100">Conocer
                                         más</a> --}}
                                     </div>
@@ -141,85 +108,104 @@
 
 
 
-        <h6 id="faq" class="text-center pt-4 fw-bold pb-3">Preguntas frecuentes</h6>
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false"
-                aria-controls="collapseExample1">
-                <b>¿Qué es score de crédito?</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample1">
-                <div class="px-3 pb-3 bg-white">
-                    El score crediticio es un puntaje calculado en base a la información reportada por distintas
-                    entidades a
-                    los burós de información crediticia, entre la que consta tu record de pagos, tu monto de
-                    endeudamiento y
-                    la antigüedad de tu historial de crédito. El score calculado por BURO DE CREDITO ECUADOR tiene un
-                    rango
-                    que va desde 1 a 999. El score crediticio es una de las varias herramientas utilizadas por las
-                    instituciones para poder determinar qué tan factible es recuperar el crédito que otorgan. Mientras
-                    más
-                    alto sea tu score significa que has mostrado un comportamiento responsable en el cumplimiento de tus
-                    obligaciones, y esto permite a las instituciones evaluar con mayor confianza futuras solicitudes de
-                    crédito. Es importante recalcar que la situación de cada individuo es distinta, y por ese motivo el
-                    score crediticio es solo uno de los factores que se utilizan para evaluar la capacidad de pago del
-                    aplicante.
+        <!-- FAQ Section -->
+        <section class="faq-section mb-4 py-5 bg-light" id="faq">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <h2 class="section-title text-primary mb-3">Preguntas frecuentes</h2>
+                    <div class="section-divider mx-auto"></div>
                 </div>
-            </div>
-        </div>
 
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false"
-                aria-controls="collapseExample2">
-                <b>¿Qué factores inciden sobre mi score crediticio y como lo puedo mejorar?</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample2">
-                <div class="px-3 pb-3 bg-white">
-                    Toda información reportada a los burós de información crediticia incide sobre el cálculo de tu
-                    score, para mantenerlo en óptima situación te recomendamos cumplir con el pago puntual de todos tus
-                    compromisos, tanto los comerciales como los financieros.
-                </div>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <div class="accordion custom-accordion" id="faqAccordion">
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq1">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                        ¿Qué es score de crédito?
+                                    </button>
+                                </h2>
+                                <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        El score crediticio es un puntaje calculado en base a la información reportada por
+                                        distintas entidades a los burós de información crediticia, entre la que consta tu
+                                        record de pagos, tu monto de endeudamiento y la antigüedad de tu historial de
+                                        crédito. El score calculado por BURO DE CREDITO ECUADOR tiene un rango que va desde
+                                        1 a 999. El score crediticio es una de las varias herramientas utilizadas por las
+                                        instituciones para poder determinar qué tan factible es recuperar el crédito que
+                                        otorgan.
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="card mb-2">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false"
-                aria-controls="collapseExample3">
-                <b>¿Cuáles son los beneficios al adquirir el reporte completo?</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample3">
-                <div class="px-3 pb-3 bg-white">
-                    Analizar la probabilidad de obtener financiamiento. Conocer qué factores te pueden ayudar a mejorar
-                    tu score crediticio. Conocer el detalle de la información reportada a BURO DE CREDITO ECUADOR
-                    Identificar si tienes obligaciones que afecten tu historial crediticio.
-                </div>
-            </div>
-        </div>
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq2">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false"
+                                        aria-controls="collapse2">
+                                        ¿Qué factores inciden sobre mi score crediticio y como lo puedo mejorar?
+                                    </button>
+                                </h2>
+                                <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Toda información reportada a los burós de información crediticia incide sobre el
+                                        cálculo de tu score, para mantenerlo en óptima situación te recomendamos cumplir con
+                                        el pago puntual de todos tus compromisos, tanto los comerciales como los
+                                        financieros.
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="card mb-5">
-            <div class="card-body w-100 d-flex justify-content-between align-items-center cursor-pointer" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseExample4" aria-expanded="false"
-                aria-controls="collapseExample4">
-                <b>¿Qué contiene el reporte completo?</b>
-                <i class="bi-chevron-down"></i>
-            </div>
-            <div class="collapse show" id="collapseExample4">
-                <div class="px-3 pb-3 bg-white">
-                    Indicador gráfico para analizar los cambios en tu perfil crediticio de los últimos 12 meses
-                    Visibilidad de las obligaciones vigentes y de las históricas de hasta 36 meses de antigüedad. Código
-                    QR que permite verificar la validez de la información del reporte. Tengo dudas acerca del reporte
-                    Para mayor información puedes acercarte al Centro de Atención al cliente ubicado en:
-                    Guayaquil: Av. LOS RIOS #609 & QUISQUIS, Edificio ORELLANA PISO 3 OF5. Correo electrónico:
-                    atencionclientes@burodecredito.ec Teléfono
-                    convencional (04)5039470
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq3">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false"
+                                        aria-controls="collapse3">
+                                        ¿Cuáles son los beneficios al adquirir el reporte completo?
+                                    </button>
+                                </h2>
+                                <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Analizar la probabilidad de obtener financiamiento. Conocer qué factores te pueden
+                                        ayudar a mejorar tu score crediticio. Conocer el detalle de la información reportada
+                                        a BURO DE CREDITO ECUADOR. Identificar si tienes obligaciones que afecten tu
+                                        historial crediticio.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item mb-3">
+                                <h2 class="accordion-header" id="faq4">
+                                    <button class="accordion-button collapsed fw-bold" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false"
+                                        aria-controls="collapse4">
+                                        ¿Qué contiene el reporte completo?
+                                    </button>
+                                </h2>
+                                <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="faq4"
+                                    data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        Indicador gráfico para analizar los cambios en tu perfil crediticio de los últimos
+                                        12 meses. Visibilidad de las obligaciones vigentes y de las históricas de hasta 36
+                                        meses de antigüedad. Código QR que permite verificar la validez de la información
+                                        del reporte.
+                                        <br><br>
+                                        <strong>Para mayor información:</strong><br>
+                                        📍 Guayaquil: Av. LOS RIOS #609 & QUISQUIS, Edificio ORELLANA PISO 3 OF5<br>
+                                        📧 atencionclientes@burodecredito.ec<br>
+                                        📞 (04) 5039470
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <div class="row text-center">
             <div class="col-12 col-md-6 mx-auto">
@@ -234,6 +220,39 @@
 
 @section('css')
     <style>
+        /* FAQ Section */
+        .custom-accordion .accordion-item {
+            border: none;
+            box-shadow: var(--shadow-soft);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .custom-accordion .accordion-button {
+            background: white;
+            border: none;
+            color: #443462;
+            font-weight: 600;
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .custom-accordion .accordion-button:not(.collapsed) {
+            background: #443462;
+            color: white;
+            box-shadow: none;
+        }
+
+        .custom-accordion .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(68, 52, 98, 0.25);
+        }
+
+        .custom-accordion .accordion-body {
+            padding: 1.5rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
         .text {
             overflow: hidden;
             text-overflow: ellipsis;

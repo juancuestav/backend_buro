@@ -18,7 +18,7 @@ class ServicioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:puede.ver.servicios')->only(['index', 'page', 'show']);
+        $this->middleware('can:puede.ver.servicios')->only(['index', 'page']);
         $this->middleware('can:puede.crear.servicios')->only('store');
         $this->middleware('can:puede.editar.servicios')->only('update');
         $this->middleware('can:puede.eliminar.servicios')->only('destroy');

@@ -214,7 +214,7 @@ $configuracion_general = ConfiguracionGeneral::first();
             if (window.innerWidth < 768) {
                 link.href = `https://api.whatsapp.com/send?phone=${phone}&text=${message}`
             } else {
-                link.href =    `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
+                link.href = `https://web.whatsapp.com/send?phone=${phone}&text=${message}`
             }
 
             link.target = "_blank"

@@ -21,7 +21,7 @@ class Servicio extends Model
 		'tipo_servicio',
 		'iva',
 		'url_video',
-		'url_destino',
+		'url_destino', // <- payphone
 		'url_paypal',
 	];
 
