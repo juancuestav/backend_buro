@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'n8n' => [
+        'url' => env('N8N_URL'),
+        'key' => env('N8N_INTERNAL_API_KEY'),
+    ],
+
 ];

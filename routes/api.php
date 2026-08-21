@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccesoDirectoController;
 use App\Http\Controllers\Admin\ActivarAppController;
 use App\Http\Controllers\Admin\ArchivoController;
+use App\Http\Controllers\Admin\CompraReporteController;
 use App\Http\Controllers\Admin\BasesDatos\IessController;
 use App\Http\Controllers\Admin\BasesDatos\RegistroCivilController;
 use App\Http\Controllers\Admin\BasesDatos\AntController;
@@ -119,6 +120,14 @@ Route::get('activar-app/pagado', [ActivarAppController::class, 'pagado']);
 Route::resource('notificaciones-cliente', NotificacionesClienteController::class)->only(['index', 'store', 'update', 'destroy']);
 Route::get('marketings', [MarketingController::class, 'index']);
 Route::resource('facturacion-planes', FacturacionPlanesController::class)->only(['index', 'update', 'destroy']);
+
+Route::middleware(['auth:sanctum', 'can:puede.acceder.compras_reportes'])->group(function () {
+    Route::get('compras/resumen', [CompraReporteController::class, 'resumen']);
+    Route::post('compras/reenviar-whatsapp', [CompraReporteController::class, 'reenviarWhatsapp']);
+    Route::get('compras/pdf', [CompraReporteController::class, 'pdf']);
+    Route::get('compras', [CompraReporteController::class, 'listado']);
+    Route::get('compras/{compra}', [CompraReporteController::class, 'detalle'])->where('compra', '[0-9a-fA-F-]{36}');
+});
 Route::resource('notificaciones', NotificacionController::class)->only(['index', 'show', 'update']);
 Route::resource('notificaciones-form-contacto', NotificacionFormularioContactoController::class)->only(['index', 'show', 'update']);
 Route::get('pedidos/download-pdf/{pedido}', [PedidoController::class, 'downloadPdf']);
